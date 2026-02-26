@@ -1,11 +1,11 @@
-// Taxas de câmbio fixas (base: Real)
+
 const taxasCambio = {
     BRL: 1,
-    USD: 5.20,  // 1 USD = 5.20 BRL
-    EUR: 5.60   // 1 EUR = 5.60 BRL
+    USD: 5.40,
+    EUR: 6.06
 };
 
-// Fatores de conversão de medidas
+
 const medidas = {
     comprimento: {
         metro: 1,
@@ -27,7 +27,7 @@ const medidas = {
         mililitro: 1000,
         metroCubico: 0.001,
         galao: 0.264172,
-        copo: 4.22675  // copos americanos
+        copo: 4.22675
     },
     temperatura: {
         celsius: 'c',
@@ -36,25 +36,25 @@ const medidas = {
     }
 };
 
-// Tabelas de impostos
+
 const tabelaSimplesNacional = {
-    comercio: 0.04,    // 4%
-    industria: 0.045,  // 4.5%
-    servicos: 0.06     // 6%
+    comercio: 0.04,
+    industria: 0.045,
+    servicos: 0.06
 };
 
 const mei = {
-    contribuicao: 67.00,  // valor fixo mensal (2024)
-    inss: 0.11,           // 11% do salário mínimo
-    iss: 5.00             // valor fixo para algumas atividades
+    contribuicao: 67.00,
+    inss: 0.11,      
+    iss: 5.00      
 };
 
-// Benefícios CLT (aproximados)
+
 const beneficiosCLT = {
-    decimoTerceiro: 1,     // 1 salário extra por ano
-    ferias: 1.33,          // férias + 1/3
-    fgts: 0.08,            // 8% do salário
-    inss: 0.20,            // 20% sobre a folha (parte do empregador)
-    valeTransporte: 0.06,  // 6% do salário (estimativa)
-    valeRefeicao: 500      // valor médio mensal
+    decimoTerceiro: 1,
+    ferias: 1.33,     
+    fgts: 0.08,        
+    inss: 0.20,
+    valeTransporte: 0.06,
+    valeRefeicao: 500
 };

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal Economy - Sistema Financeiro Completo</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    
+    <!-- Google Fonts (opcional, para deixar bonito) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome (ícones) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <h1><i class="fas fa-coins"></i>Universal Economy</h1>
+            <p class="subtitle">Sistema completo de finanças e conversões</p>
+        </header>
+
+        <!-- MENU DE ABAS -->
+        <div class="tab-container">
+            <button class="tab-btn active" onclick="openTab('conversor')">
+                <i class="fas fa-exchange-alt"></i> Conversor Universal
+            </button>
+            <button class="tab-btn" onclick="openTab('impostos')">
+                <i class="fas fa-file-invoice"></i> Simulador de Impostos
+            </button>
+            <button class="tab-btn" onclick="openTab('planejador')">
+                <i class="fas fa-chart-line"></i> Planejador Financeiro
+            </button>
+        </div>
+
+        <!-- CONTEÚDO DAS ABAS -->
+        <div id="conversor" class="tab-content active">
+            <!-- CARD 1: Conversor de Moedas -->
+            <div class="card">
+                <h2><i class="fas fa-dollar-sign"></i> Conversor de Moedas</h2>
+                <div class="conversor-grid">
+                    <div class="input-group">
+                        <label>Valor:</label>
+                        <input type="number" id="valorMoeda" placeholder="Digite o valor" value="1">
+                    </div>
+                    <div class="input-group">
+                        <label>De:</label>
+                        <select id="moedaOrigem">
+                            <option value="BRL">Real (R$)</option>
+                            <option value="USD">Dólar (US$)</option>
+                            <option value="EUR">Euro (€)</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>Para:</label>
+                        <select id="moedaDestino">
+                            <option value="USD">Dólar (US$)</option>
+                            <option value="BRL">Real (R$)</option>
+                            <option value="EUR">Euro (€)</option>
+                        </select>
+                    </div>
+                    <button onclick="converterMoeda()" class="btn-converter">
+                        <i class="fas fa-sync-alt"></i> Converter
+                    </button>
+                </div>
+                <div id="resultadoMoeda" class="resultado">
+                    Resultado aparecerá aqui
+                </div>
+            </div>
+
+            <!-- CARD 2: Conversor de Medidas -->
+            <div class="card">
+                <h2><i class="fas fa-ruler"></i> Conversor de Medidas</h2>
+                <div class="conversor-grid">
+                    <div class="input-group">
+                        <label>Valor:</label>
+                        <input type="number" id="valorMedida" placeholder="Digite o valor" value="1">
+                    </div>
+                    <div class="input-group">
+                        <label>Tipo:</label>
+                        <select id="tipoMedida" onchange="atualizarOpcoesMedida()">
+                            <option value="comprimento">Comprimento</option>
+                            <option value="peso">Peso</option>
+                            <option value="volume">Volume</option>
+                            <option value="temperatura">Temperatura</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>De:</label>
+                        <select id="medidaOrigem"></select>
+                    </div>
+                    <div class="input-group">
+                        <label>Para:</label>
+                        <select id="medidaDestino"></select>
+                    </div>
+                    <button onclick="converterMedida()" class="btn-converter">
+                        <i class="fas fa-sync-alt"></i> Converter
+                    </button>
+                </div>
+                <div id="resultadoMedida" class="resultado">
+                    Resultado aparecerá aqui
+                </div>
+            </div>
+        </div>
+
+        <div id="impostos" class="tab-content">
+            <!-- CARD: Simples Nacional -->
+            <div class="card">
+                <h2><i class="fas fa-building"></i> Simples Nacional</h2>
+                <div class="form-group">
+                    <label>Faturamento Mensal (R$):</label>
+                    <input type="number" id="faturamento" placeholder="Ex: 10000" value="10000">
+                </div>
+                <div class="form-group">
+                    <label>Atividade:</label>
+                    <select id="atividade">
+                        <option value="comercio">Comércio (4%)</option>
+                        <option value="industria">Indústria (4.5%)</option>
+                        <option value="servicos">Serviços (6%)</option>
+                    </select>
+                </div>
+                <button onclick="calcularSimplesNacional()" class="btn-converter">
+                    <i class="fas fa-calculator"></i> Calcular Imposto
+                </button>
+                
+                <div id="resultadoSimples" class="resultado"></div>
+            </div>
+
+            <!-- CARD: MEI -->
+            <div class="card">
+                <h2><i class="fas fa-store"></i> Microempreendedor Individual (MEI)</h2>
+                <button onclick="calcularMEI()" class="btn-converter">
+                    <i class="fas fa-calculator"></i> Calcular Contribuição MEI
+                </button>
+                <div id="resultadoMEI" class="resultado"></div>
+            </div>
+
+            <!-- CARD: CLT vs PJ -->
+            <div class="card">
+                <h2><i class="fas fa-balance-scale"></i> Comparativo: CLT vs PJ</h2>
+                <div class="conversor-grid">
+                    <div class="input-group">
+                        <label>Salário CLT (R$):</label>
+                        <input type="number" id="salarioCLT" placeholder="Ex: 5000" value="5000">
+                    </div>
+                    <div class="input-group">
+                        <label>Proposta PJ (R$):</label>
+                        <input type="number" id="salarioPJ" placeholder="Ex: 7000" value="7000">
+                    </div>
+                </div>
+                <button onclick="compararCLTPJ()" class="btn-converter">
+                    <i class="fas fa-chart-bar"></i> Comparar
+                </button>
+                <div id="resultadoComparativo" class="resultado"></div>
+            </div>
+        </div>
+
+        <div id="planejador" class="tab-content">
+            <!-- CARD: Controle de Gastos -->
+            <div class="card">
+                <h2><i class="fas fa-wallet"></i> Controle de Gastos Mensais</h2>
+                
+                <div class="form-row">
+                    <input type="text" id="descricaoGasto" placeholder="Descrição (ex: Aluguel)">
+                    <input type="number" id="valorGasto" placeholder="Valor R$">
+                    <select id="categoriaGasto">
+                        <option value="moradia">Moradia</option>
+                        <option value="alimentacao">Alimentação</option>
+                        <option value="transporte">Transporte</option>
+                        <option value="lazer">Lazer</option>
+                        <option value="saude">Saúde</option>
+                        <option value="educacao">Educação</option>
+                    </select>
+                    <button onclick="adicionarGasto()" class="btn-converter">
+                        <i class="fas fa-plus"></i> Adicionar
+                    </button>
+                </div>
+
+                <div id="listaGastos" class="lista-gastos">
+                    <!-- Gastos aparecerão aqui -->
+                </div>
+
+                <div class="total-gastos">
+                    <strong>Total: R$ <span id="totalGastos">0,00</span></strong>
+                </div>
+            </div>
+
+            <!-- CARD: Metas de Economia -->
+            <div class="card">
+                <h2><i class="fas fa-bullseye"></i> Metas de Economia</h2>
+                
+                <div class="form-row">
+                    <input type="text" id="descricaoMeta" placeholder="O que quer comprar?">
+                    <input type="number" id="valorMeta" placeholder="Valor necessário R$">
+                    <input type="number" id="economiaMensal" placeholder="Quanto vai guardar por mês?">
+                    <button onclick="calcularMeta()" class="btn-converter">
+                        <i class="fas fa-clock"></i> Calcular Tempo
+                    </button>
+                </div>
+
+                <div id="resultadoMeta" class="resultado"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="data/taxas-fixas.js"></script>
+    <script src="assets/js/conversor.js"></script>
+    <script src="assets/js/impostos.js"></script>
+    <script src="assets/js/planejador.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
